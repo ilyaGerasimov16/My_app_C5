@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_linear_layout_activity_main">20dp</dimen>
+    <dimen name="text_size_edit_text">24sp</dimen>
+    <dimen name="button_edit_text">17sp</dimen>
+</resources>
