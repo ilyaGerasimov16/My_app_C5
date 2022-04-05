@@ -14,5 +14,6 @@ class LoginContract {
 
         fun onAttach(view: View)
         fun onLogin(login: String, password:String)
+        fun checkCredentials(login: String, password:String): Boolean
     }
 }
