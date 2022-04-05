@@ -1,7 +1,11 @@
 package com.example.my_app_c5
 
+import android.os.Handler
+import android.os.Looper
+
 class LoginPresenter: LoginContract.Presenter{
     private var view:LoginContract.View? = null
+    private val uiHandler = Handler(Looper.getMainLooper())
 
 
     override fun onAttach(view: LoginContract.View) {
@@ -10,7 +14,7 @@ class LoginPresenter: LoginContract.Presenter{
 
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
-        Thread {
+        uiHandler.post{
             Thread.sleep(3_000)
             view?.hideProgress()
             if (checkCredentials(login,password)){
@@ -18,7 +22,7 @@ class LoginPresenter: LoginContract.Presenter{
             } else {
                 view?.setError("Неверный пароль")
             }
-        }.start()
+        }
     }
 
     override fun checkCredentials(login: String, password: String): Boolean {

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.MainThread
 import androidx.core.view.isVisible
 import com.example.my_app_c5.databinding.ActivityMainBinding
 
@@ -24,22 +25,20 @@ class MainActivity : AppCompatActivity(), LoginContract.View{
             presenter?.onLogin(binding.editTextLogin.text.toString(), binding.editTextPassword.text.toString())
         }
     }
-
+    @MainThread
     override fun setSuccess() {
-        runOnUiThread{
-            binding.editTextLogin.isVisible = false
-            binding.editTextPassword.isVisible = false
-            binding.buttonLogin.isVisible = false
-            binding.root.setBackgroundColor(Color.GREEN)
-        }
+        binding.editTextLogin.isVisible = false
+        binding.editTextPassword.isVisible = false
+        binding.buttonLogin.isVisible = false
+        binding.root.setBackgroundColor(Color.GREEN)
     }
 
+    @MainThread
     override fun setError(error: String) {
-        runOnUiThread{
-            Toast.makeText(this, "Ошибка: $error", Toast.LENGTH_SHORT).show()
-        }
+        Toast.makeText(this, "Ошибка: $error", Toast.LENGTH_SHORT).show()
     }
 
+    @MainThread
     override fun showProgress() {
         binding.buttonLogin.isEnabled = true
         val textView = TextView(this)
@@ -50,9 +49,8 @@ class MainActivity : AppCompatActivity(), LoginContract.View{
         }
         binding.root.addView(textView,3)
     }
-
+    @MainThread
     override fun hideProgress() {
-        runOnUiThread {
-            binding.root.getChildAt(3).isVisible = false }
+        binding.root.getChildAt(3).isVisible = false
     }
 }
